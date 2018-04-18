@@ -1,3 +1,3 @@
 class Article < ActiveRecord::Base
-  belongs_to :queryresults, autosave: true
+  belongs_to :queryresults
 end

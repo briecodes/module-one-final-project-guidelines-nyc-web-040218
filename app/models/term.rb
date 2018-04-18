@@ -1,3 +1,3 @@
 class Term < ActiveRecord::Base
-	has_one :query, autosave: true
+	has_one :query
 end
