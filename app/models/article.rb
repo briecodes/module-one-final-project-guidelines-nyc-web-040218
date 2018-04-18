@@ -1,5 +1,3 @@
-class QueryResults < ActiveRecord::Base
-  # ActiveRecord
-  # has_many :queryresults
-  # has_many :queries, through: :queryresults
+class Article < ActiveRecord::Base
+  belongs_to :queryresults, autosave: true
 end

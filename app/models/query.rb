@@ -1,16 +1,10 @@
 class Query < ActiveRecord::Base
   # ActiveRecord
-  # has_many :articles, through: :queryresults
-  # attr_reader :name
-  #
-	# ALL = []
-  #
-  # def initialize(term_inst)
-	# 	@name == "Search Term: #{term_inst.name}"
-	# 	ALL << self
-	# end
+  has_one :term, autosave: true
+  has_many :articles, through: :queryresults
 
 	def search_term(term_inst)
+    binding.pry
 		Article.all.select do |article|
 			article.title.downcase.include?(term_inst.name)
 			article.content.downcase.include?(term_inst.name)

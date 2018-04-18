@@ -1,6 +1,7 @@
 class QueryResults < ActiveRecord::Base
   # ActiveRecord
-  # has_many :articles
+  has_many :articles
+
   # attr_reader :name, :query_id, :article_id
   #
   # ALL = []
