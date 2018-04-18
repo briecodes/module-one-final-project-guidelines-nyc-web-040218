@@ -13,10 +13,10 @@
 ActiveRecord::Schema.define(version: 4) do
 
   create_table "articles", force: :cascade do |t|
-    t.string   "title"
+    t.string "title"
     t.datetime "date"
-    t.string   "content"
-    t.text     "url"
+    t.string "content"
+    t.text "url"
   end
 
   create_table "queries", force: :cascade do |t|

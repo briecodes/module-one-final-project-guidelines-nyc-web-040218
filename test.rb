@@ -1,14 +1,22 @@
 require 'rest-client'
 require 'JSON'
+require 'pry'
 
-# Built by LucyBot. www.lucybot.com
-uri = URI("https://api.nytimes.com/svc/semantic/v2/concept/search.json")
+# all_books = RestClient.get('https://www.googleapis.com/books/v1/volumes?q=philosophy&maxResults=15key=AIzaSyCZGgx4VzR81LmIxbFTN4c5APMTJfQf')
+# books_hash = JSON.parse(all_books)
+
+uri = URI("https://www.googleapis.com/books/v1/volumes?")
 http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 uri.query = URI.encode_www_form({
- "api-key" => "dff3bb4eb3784dce96239aa8418ce2e3",
- "query" => ""
+ "api-key" => "AIzaSyCZGgx4VzR81LmIxbFTN4c5APMTJfQf",
+ "q" => "poetry",
+ "maxResults" => 15
 })
 request = Net::HTTP::Get.new(uri.request_uri)
 @result = JSON.parse(http.request(request).body)
-puts @result.inspect
+# puts @result.inspect
+
+@result["items"].each do |volume|
+  puts "Here is a book: #{volume["volumeInfo"]["title"]} by #{volume["volumeInfo"]["authors"] ? volume["volumeInfo"]["authors"].join(", ") : 'Unknown'}"
+end

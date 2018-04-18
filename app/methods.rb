@@ -41,7 +41,7 @@ end
 
 def search_term_instance(term_inst)
   Article.all.select do |article|
-    article.title.downcase.include?(term_inst.term.downcase) || article.content.downcase.include?(term_inst.term.downcase)
+    article.title ? article.title.downcase.include?(term_inst.term.downcase) : nil || article.content ? article.content.downcase.include?(term_inst.term.downcase) : nil
   end
 end
 
@@ -66,6 +66,7 @@ def puts_results(results_array)
 end
 
 def run_first
+  binding.pry
   welcome
   instruction
   word = get_term
