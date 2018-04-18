@@ -24,11 +24,8 @@ uri.query = URI.encode_www_form({
 })
 request = Net::HTTP::Get.new(uri.request_uri)
 @result = JSON.parse(http.request(request).body)
-# puts @result.inspect
 
 @result["items"].each do |volume|
   book = Article.new(title: volume["volumeInfo"]["title"], content: volume["volumeInfo"]["description"] ? volume["volumeInfo"]["description"] : "No description available.", url: volume["volumeInfo"]["infoLink"])
   book.save
-  # puts "I've saved the following: #{volume["volumeInfo"]["title"]}"
-  # puts "Here is a book: #{volume["volumeInfo"]["title"]} by #{volume["volumeInfo"]["authors"] ? volume["volumeInfo"]["authors"].join(", ") : 'Unknown'}"
 end

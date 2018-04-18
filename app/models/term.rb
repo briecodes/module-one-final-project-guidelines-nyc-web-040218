@@ -1,3 +1,3 @@
-class Term < ActiveRecord::Base
+class SearchTerm < ActiveRecord::Base
 	has_one :query
 end

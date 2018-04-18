@@ -40,14 +40,14 @@ def create_query_from_term_instance(term_inst)
 end
 
 def search_term_instance(term_inst)
-  Article.all.select do |article|
-    article.title ? article.title.downcase.include?(term_inst.term.downcase) : nil || article.content ? article.content.downcase.include?(term_inst.term.downcase) : nil
+  Book.all.select do |book|
+    book.title ? book.title.downcase.include?(term_inst.term.downcase) : nil || book.content ? book.content.downcase.include?(term_inst.term.downcase) : nil
   end
 end
 
 def save_query_results(results_array, query_inst)
-  results_array.each do |article|
-    q = QueryResults.new({query_id: query_inst.id, article_id: article.id})
+  results_array.each do |book|
+    q = QueryResults.new({query_id: query_inst.id, book_id: book.id})
     q.save
   end
 end
@@ -57,10 +57,10 @@ def puts_results(results_array)
   puts ""
   puts "We found the following:"
   puts ""
-  results_array.each do |article|
-    puts "Title: #{article.title}"
-    puts "#{article.content}"
-    puts "#{article.url}"
+  results_array.each do |book|
+    puts "Title: #{book.title}"
+    puts "#{book.content}"
+    puts "#{book.url}"
     puts "* * * *"
   end
 end
