@@ -10,13 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 4) do
+ActiveRecord::Schema.define(version: 8) do
 
-  create_table "articles", force: :cascade do |t|
+  create_table "authors", force: :cascade do |t|
+    t.string "full_name"
+  end
+
+  create_table "bookauthors", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "author_id"
+  end
+
+  create_table "bookcategories", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "category_id"
+  end
+
+  create_table "books", force: :cascade do |t|
     t.string "title"
-    t.datetime "date"
-    t.string "content"
+    t.string "pub_date"
+    t.string "description"
+    t.integer "page_count"
+    t.integer "avg_rating"
+    t.integer "ratings_count"
     t.text "url"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "word"
   end
 
   create_table "queries", force: :cascade do |t|
@@ -25,10 +46,10 @@ ActiveRecord::Schema.define(version: 4) do
 
   create_table "query_results", force: :cascade do |t|
     t.integer "query_id"
-    t.integer "article_id"
+    t.integer "book_id"
   end
 
-  create_table "terms", force: :cascade do |t|
+  create_table "search_terms", force: :cascade do |t|
     t.string "term"
   end
 

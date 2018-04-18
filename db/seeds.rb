@@ -36,7 +36,11 @@ request = Net::HTTP::Get.new(uri.request_uri)
   new_book.ratings_count = volume["volumeInfo"]["ratingsCount"]
   new_book.save
 
-  ["volumeInfo"]["authors"].each do |name|
-    Author.find_or_create_by({:full_name => name})
+  if ["volumeInfo"]["authors"]
+    ["volumeInfo"]["authors"].each do |name|
+      Author.find_or_create_by({:full_name => name})
+    end
+  else
+    Author.find_or_create_by({:full_name => "Unknown"})
   end
 end
