@@ -5,9 +5,9 @@ class CreateBooks < ActiveRecord::Migration[4.2]
       t.string :pub_date
       t.string :description
       t.integer :page_count
-      t.text :url
       t.integer :avg_rating
       t.integer :ratings_count
+      t.text :url
     end
   end
 end
