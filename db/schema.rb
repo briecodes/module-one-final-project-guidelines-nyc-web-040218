@@ -10,6 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 4) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "date"
+    t.string   "content"
+    t.text     "url"
+  end
+
+  create_table "queries", force: :cascade do |t|
+    t.integer "term_id"
+  end
+
+  create_table "query_results", force: :cascade do |t|
+    t.integer "query_id"
+    t.integer "article_id"
+  end
+
+  create_table "terms", force: :cascade do |t|
+    t.string "term"
+  end
 
 end
