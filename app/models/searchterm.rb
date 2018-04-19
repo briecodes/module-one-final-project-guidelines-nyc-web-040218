@@ -1,3 +1,4 @@
 class SearchTerm < ActiveRecord::Base
-	belongs_to :queries
+	has_many :queries
+	has_many :query_results, through: :queries
 end

@@ -1,4 +1,4 @@
 class QueryResults < ActiveRecord::Base
-  has_many :queries
-  has_many :books
+  belongs_to :query
+  belongs_to :book
 end

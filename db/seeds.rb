@@ -64,4 +64,4 @@ request = Net::HTTP::Get.new(uri.request_uri)
   end
 end
 
-puts "Added #{Book.all.count} books."
+puts "You have #{Book.all.count} books in your DB."

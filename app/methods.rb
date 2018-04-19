@@ -11,6 +11,10 @@ def instruction
   puts "Enter your search term, or exit."
 end
 
+def order_question
+  puts "You can order your results by RATING, PUBLISH DATE, or AUTHOR. You may also RESTART your search or QUIT."
+end
+
 def get_term
   word = gets.chomp
 end
@@ -59,12 +63,18 @@ def puts_results(results_array)
     puts "We found the following #{results_array.count} results:"
     puts ""
     results_array.each do |book|
-      puts "Title: #{book.title}, Published #{book.pub_date}. #{book.page_count} pages."
+      puts "Title: #{book.title}"
+      puts "Publish Date: #{book.pub_date}"
+      if book.page_count
+        puts "#{book.page_count} pages."
+      end
+      puts "Author(s): #{book.authors.map{|a| a.full_name}.join(', ')}"
       puts "#{book.description}"
+      puts "Categories: #{book.categories.map{|c| c.cat_word}.join(', ')}"
       if book.avg_rating
         puts "Rating: #{book.avg_rating} out of #{book.ratings_count}."
       end
-      puts "#{book.url}"
+      puts "Buy now: #{book.url}"
       puts ""
       puts "* * * * * * * * * * * * * * * *"
       puts ""
@@ -78,7 +88,7 @@ def puts_results(results_array)
 end
 
 def run_first
-  binding.pry
+  # binding.pry
   welcome
   instruction
   word = get_term
