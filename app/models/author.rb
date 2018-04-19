@@ -1,4 +1,4 @@
 class Author < ActiveRecord::Base
-  has_many :books
-  has_many :categories, through: :books
+  belongs_to :book_authors
+  has_many :books, through: :book_authors
 end

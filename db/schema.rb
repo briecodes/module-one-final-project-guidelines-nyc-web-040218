@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 8) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "word"
+    t.string "cat_word"
   end
 
   create_table "queries", force: :cascade do |t|

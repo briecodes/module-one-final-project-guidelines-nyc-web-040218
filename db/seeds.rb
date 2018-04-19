@@ -53,17 +53,15 @@ request = Net::HTTP::Get.new(uri.request_uri)
   # CATEGORY CREATION
   if volume["volumeInfo"]["categories"]
     volume["volumeInfo"]["categories"].each do |cat|
-      new_cat = Category.find_or_create_by({:word => cat})
+      new_cat = Category.find_or_create_by({:cat_word => cat})
       new_bc = BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
       new_bc.save
     end
   else
-    new_cat = Category.find_or_create_by({:word => "Unknown"})
+    new_cat = Category.find_or_create_by({:cat_word => "Unknown"})
     new_bc = BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
     new_bc.save
   end
-
-  puts "Added the following titles:"
-  Book.all.each{|book| puts book.title}
-
 end
+
+puts "Added #{Book.all.count} books."

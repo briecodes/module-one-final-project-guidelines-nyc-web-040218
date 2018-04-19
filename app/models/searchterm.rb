@@ -1,3 +1,3 @@
 class SearchTerm < ActiveRecord::Base
-	has_one :query
+	belongs_to :queries
 end
