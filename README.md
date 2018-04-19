@@ -47,3 +47,7 @@ Projects need to be approved prior to launching into them, so take some time to 
       - Address, if anything, what you would change or add to what you have today?
       - Present any code you would like to highlight.   
 7. *OPTIONAL, BUT RECOMMENDED*: Write a blog post about the project and process.
+
+
+# NOTE
+https://medium.com/@RyanDavidson/transform-images-to-ascii-art-with-asciiart-gem-5e877016eeab
