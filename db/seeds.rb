@@ -29,7 +29,7 @@ request = Net::HTTP::Get.new(uri.request_uri)
   # BOOK CREATION
   new_book = Book.new()
   new_book.title = volume["volumeInfo"]["title"]
-  new_book.title = volume["volumeInfo"]["publishedDate"]
+  new_book.pub_date = volume["volumeInfo"]["publishedDate"]
   volume["volumeInfo"]["description"] ? new_book.description = volume["volumeInfo"]["description"] : "No description available."
   new_book.page_count = volume["volumeInfo"]["pageCount"]
   new_book.url = volume["volumeInfo"]["infoLink"]
@@ -41,22 +41,26 @@ request = Net::HTTP::Get.new(uri.request_uri)
   if volume["volumeInfo"]["authors"]
     volume["volumeInfo"]["authors"].each do |name|
       new_author = Author.find_or_create_by({:full_name => name})
-      BookAuthor.new({book_id: new_book.id, author_id: new_author.id})
+      new_ba = BookAuthor.new({book_id: new_book.id, author_id: new_author.id})
+      new_ba.save
     end
   else
     new_author = Author.find_or_create_by({:full_name => "Unknown"})
-    BookAuthor.new({book_id: new_book.id, author_id: new_author.id})
+    new_ba = BookAuthor.new({book_id: new_book.id, author_id: new_author.id})
+    new_ba.save
   end
 
   # CATEGORY CREATION
   if volume["volumeInfo"]["categories"]
     volume["volumeInfo"]["categories"].each do |cat|
       new_cat = Category.find_or_create_by({:word => cat})
-      BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
+      new_bc = BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
+      new_bc.save
     end
   else
     new_cat = Category.find_or_create_by({:word => "Unknown"})
-    BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
+    new_bc = BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
+    new_bc.save
   end
 
 end
