@@ -1,4 +1,4 @@
 class BookCategory < ActiveRecord::Base
-  has_many :books
-  has_many :categories
+  belongs_to :book
+  belongs_to :category
 end
