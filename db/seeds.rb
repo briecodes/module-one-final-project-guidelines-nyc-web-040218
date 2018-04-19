@@ -33,8 +33,16 @@ request = Net::HTTP::Get.new(uri.request_uri)
   volume["volumeInfo"]["description"] ? new_book.description = volume["volumeInfo"]["description"] : new_book.description = "No description available."
   new_book.page_count = volume["volumeInfo"]["pageCount"]
   new_book.url = volume["volumeInfo"]["infoLink"]
-  new_book.avg_rating = volume["volumeInfo"]["averageRating"]
-  new_book.ratings_count = volume["volumeInfo"]["ratingsCount"]
+  if volume["volumeInfo"]["averageRating"]
+    new_book.avg_rating = volume["volumeInfo"]["averageRating"]
+  else
+    new_book.avg_rating = 0
+  end
+  if volume["volumeInfo"]["ratingsCount"]
+    new_book.ratings_count = volume["volumeInfo"]["ratingsCount"]
+  else
+    new_book.ratings_count = 0
+  end
   new_book.save
 
   # AUTHOR CREATION

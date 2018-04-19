@@ -1,3 +1,5 @@
+MY_WORDS = []
+
 def welcome
   puts ""
   puts ""
@@ -8,32 +10,38 @@ end
 def instruction
   puts ""
   puts ""
-  puts "Enter your search term, or exit."
+  puts "Enter your search term, or EXIT."
 end
 
 def order_question
-  puts "You can order your results by RATING, PUBLISH DATE, or AUTHOR. You may also RESTART your search or QUIT."
+  puts "You can order your results by RATING or PUBLISH DATE. You may also RESTART your search or EXIT."
 end
 
-def get_term
-  word = gets.chomp
+def get_response
+  gets.chomp
 end
 
 def check_response(word)
   if word.downcase == "exit"
     puts "Goodbye!"
     exit
+  elsif word.downcase == "rating"
+    "avg_rating"
+  elsif word.downcase == "publish date"
+    "pub_date"
+  elsif word.downcase == "restart"
+    run
   end
+end
+
+def order_results(order_method, results_array)
+  # binding.pry
+  results_array.sort!{|a, b| b.send(order_method) <=> a.send(order_method)}
 end
 
 def create_term_instance(word)
   SearchTerm.find_or_create_by({:term => word})
   # if SearchTerm.all.exists?(:term => "word")
-  #
-  # else
-  #   w = SearchTerm.new({term: word})
-  #   w.save
-  #   w
   # end
 end
 
@@ -51,7 +59,7 @@ end
 
 def save_query_results(results_array, query_inst)
   results_array.each do |book|
-    q = QueryResults.new({query_id: query_inst.id, book_id: book.id})
+    q = QueryResult.new({query_id: query_inst.id, book_id: book.id})
     q.save
   end
 end
@@ -72,7 +80,7 @@ def puts_results(results_array)
       puts "#{book.description}"
       puts "Categories: #{book.categories.map{|c| c.cat_word}.join(', ')}"
       if book.avg_rating
-        puts "Rating: #{book.avg_rating} out of #{book.ratings_count}."
+        puts "Average Rating: #{book.avg_rating}, from #{book.ratings_count} responses."
       end
       puts "Buy now: #{book.url}"
       puts ""
@@ -87,30 +95,43 @@ def puts_results(results_array)
   end
 end
 
-def run_first
+def order?(results_array)
+  order_question
+  up_word = get_response
+  response = check_response(up_word)
   # binding.pry
-  welcome
-  instruction
-  word = get_term
-  check_response(word)
-  puts "Searching for #{word}…"
-  new_term = create_term_instance(word)
-  new_query = create_query_from_term_instance(new_term)
-  results_array = search_term_instance(new_term)
-  save_query_results(results_array, new_query)
+  order_results(response, results_array)
   puts_results(results_array)
-  run
+  puts ""
+  puts "SEARCHED: #{MY_WORDS.join(" > ")}"
+  puts "Filtered by #{up_word.upcase}"
+  puts ""
+  puts ""
+
+  order?(results_array)
 end
 
 def run
+  # binding.pry
   instruction
-  word = get_term
+  word = get_response
+  MY_WORDS << word
   check_response(word)
   puts "Searching for #{word}…"
+
+  # CREATE SEARCH TERM INSTANCE & SAVE TO DATABASE
   new_term = create_term_instance(word)
+  # CREATE QUERY INSTANCE & SAVE TO DATABASE
   new_query = create_query_from_term_instance(new_term)
+  # PLACE SEARCH RESULTS INSIDE AN ARRAY
   results_array = search_term_instance(new_term)
+  # SAVE RESULTS & QUERY RELATIONSHIP TO DATABASE
   save_query_results(results_array, new_query)
+  # FORMATS & PUTS RESULTS TO THE SCREEN
   puts_results(results_array)
-  run
+
+  puts "SEARCHED: #{MY_WORDS.join(" > ")}"
+  puts ""
+  puts ""
+  order?(results_array)
 end
