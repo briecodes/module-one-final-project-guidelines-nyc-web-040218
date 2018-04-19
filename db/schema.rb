@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 8) do
     t.string "full_name"
   end
 
-  create_table "bookauthors", force: :cascade do |t|
+  create_table "book_authors", force: :cascade do |t|
     t.integer "book_id"
     t.integer "author_id"
   end
 
-  create_table "bookcategories", force: :cascade do |t|
+  create_table "book_categories", force: :cascade do |t|
     t.integer "book_id"
     t.integer "category_id"
   end

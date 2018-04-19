@@ -38,22 +38,25 @@ request = Net::HTTP::Get.new(uri.request_uri)
   new_book.save
 
   # AUTHOR CREATION
-  new_author = ""
   if volume["volumeInfo"]["authors"]
     volume["volumeInfo"]["authors"].each do |name|
       new_author = Author.find_or_create_by({:full_name => name})
+      BookAuthor.new({book_id: new_book.id, author_id: new_author.id})
     end
   else
     new_author = Author.find_or_create_by({:full_name => "Unknown"})
+    BookAuthor.new({book_id: new_book.id, author_id: new_author.id})
   end
 
   # CATEGORY CREATION
-  new_cat = ""
   if volume["volumeInfo"]["categories"]
     volume["volumeInfo"]["categories"].each do |cat|
       new_cat = Category.find_or_create_by({:word => cat})
+      BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
     end
   else
     new_cat = Category.find_or_create_by({:word => "Unknown"})
+    BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
   end
+
 end
