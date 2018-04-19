@@ -1,18 +1,23 @@
 def welcome
-  puts "Welcome to..."
-
-  art = AsciiArt.new("/Users/ryandavidson/app/breadcrumbs.png")
-  puts art.to_ascii_art(width: 65)
-
   puts ""
   puts ""
-  puts "                            v.0.2"
+  puts ""
+
+  art = AsciiArt.new("./app/breadcrumbs.jpg")
+  puts art.to_ascii_art(width: 120)
+
+  puts ""
+  puts "Welcome to BREADCRUMBS v.0.2"
+  puts ""
+  puts "Your Personal Keyword Search Assistant"
+  puts ""
+  puts "(and if you forget your search path... follow the breadcrumbs...)"
 end
 
 def instruction
   puts ""
+  puts "Please enter your search term, or type 'exit'."
   puts ""
-  puts "Enter your search term, or exit."
 end
 
 def get_term
