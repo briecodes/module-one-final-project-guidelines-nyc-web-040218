@@ -26,6 +26,7 @@ request = Net::HTTP::Get.new(uri.request_uri)
 @result = JSON.parse(http.request(request).body)
 
 @result["items"].each do |volume|
+  # BOOK CREATION
   new_book = Book.new()
   new_book.title = volume["volumeInfo"]["title"]
   new_book.title = volume["volumeInfo"]["publishedDate"]
@@ -35,6 +36,8 @@ request = Net::HTTP::Get.new(uri.request_uri)
   new_book.avg_rating = volume["volumeInfo"]["averageRating"]
   new_book.ratings_count = volume["volumeInfo"]["ratingsCount"]
   new_book.save
+
+  # AUTHOR CREATION
   new_author = ""
   if volume["volumeInfo"]["authors"]
     volume["volumeInfo"]["authors"].each do |name|
@@ -42,5 +45,15 @@ request = Net::HTTP::Get.new(uri.request_uri)
     end
   else
     new_author = Author.find_or_create_by({:full_name => "Unknown"})
+  end
+
+  # CATEGORY CREATION
+  new_cat = ""
+  if volume["volumeInfo"]["categories"]
+    volume["volumeInfo"]["categories"].each do |cat|
+      new_cat = Category.find_or_create_by({:word => cat})
+    end
+  else
+    new_cat = Category.find_or_create_by({:word => "Unknown"})
   end
 end
