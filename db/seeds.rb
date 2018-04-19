@@ -30,7 +30,7 @@ request = Net::HTTP::Get.new(uri.request_uri)
   new_book = Book.new()
   new_book.title = volume["volumeInfo"]["title"]
   new_book.pub_date = volume["volumeInfo"]["publishedDate"]
-  volume["volumeInfo"]["description"] ? new_book.description = volume["volumeInfo"]["description"] : "No description available."
+  volume["volumeInfo"]["description"] ? new_book.description = volume["volumeInfo"]["description"] : new_book.description = "No description available."
   new_book.page_count = volume["volumeInfo"]["pageCount"]
   new_book.url = volume["volumeInfo"]["infoLink"]
   new_book.avg_rating = volume["volumeInfo"]["averageRating"]
@@ -62,5 +62,8 @@ request = Net::HTTP::Get.new(uri.request_uri)
     new_bc = BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
     new_bc.save
   end
+
+  puts "Added the following titles:"
+  Book.all.each{|book| puts book.title}
 
 end

@@ -23,11 +23,11 @@ def check_response(word)
 end
 
 def create_term_instance(word)
-  Term.find_or_create_by({:term => word})
-  # if Term.all.exists?(:term => "word")
+  SearchTerm.find_or_create_by({:term => word})
+  # if SearchTerm.all.exists?(:term => "word")
   #
   # else
-  #   w = Term.new({term: word})
+  #   w = SearchTerm.new({term: word})
   #   w.save
   #   w
   # end
@@ -41,7 +41,7 @@ end
 
 def search_term_instance(term_inst)
   Book.all.select do |book|
-    book.title ? book.title.downcase.include?(term_inst.term.downcase) : nil || book.content ? book.content.downcase.include?(term_inst.term.downcase) : nil
+    book.title ? book.title.downcase.include?(term_inst.term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.term.downcase) : nil
   end
 end
 
@@ -53,15 +53,27 @@ def save_query_results(results_array, query_inst)
 end
 
 def puts_results(results_array)
-  puts ""
-  puts ""
-  puts "We found the following:"
-  puts ""
-  results_array.each do |book|
-    puts "Title: #{book.title}"
-    puts "#{book.content}"
-    puts "#{book.url}"
-    puts "* * * *"
+  if results_array.count > 0
+    puts ""
+    puts ""
+    puts "We found the following #{results_array.count} results:"
+    puts ""
+    results_array.each do |book|
+      puts "Title: #{book.title}, Published #{book.pub_date}. #{book.page_count} pages."
+      puts "#{book.description}"
+      if book.avg_rating
+        puts "Rating: #{book.avg_rating} out of #{book.ratings_count}."
+      end
+      puts "#{book.url}"
+      puts ""
+      puts "* * * * * * * * * * * * * * * *"
+      puts ""
+    end
+  else
+    puts ""
+    puts ""
+    puts "Sorry, no matches for your search. Try again!"
+    puts ""
   end
 end
 
