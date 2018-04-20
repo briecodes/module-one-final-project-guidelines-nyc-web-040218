@@ -45,7 +45,7 @@ def check_response(word)
     # My_WORDS.clear
     welcome
     run
-  elsif word.downcase == "past searches"
+  elsif word.downcase == "past searches" || word.downcase == "previous searches" 
     get_past_searches
     run
   elsif word.downcase == "most popular"
@@ -67,10 +67,25 @@ end
 
 # GET PAST SEARCH WORDS AND BOOK ASSSOCIATIONS
 def get_past_searches
-  puts "'#{term.search_term}' Resulted in #{term.books.count} matche(s):"
-  SearchTerm.all.each do |term|
-    puts term.books.map{|b| b.title }.join(", ")
+  puts ""
+  puts ""
+  if SearchTerm.all.count > 0
+    SearchTerm.all.each do |term|
+      if term.books.count == 1
+        puts "'#{term.search_term}' Resulted in #{term.books.count} match:"
+        puts term.books.map{|b| b.title }.join(", ")
+      elsif term.books.count > 1
+        puts "'#{term.search_term}' Resulted in #{term.books.count} matches:"
+        puts term.books.map{|b| b.title }.join(", ")
+      else
+        puts "'#{term.search_term}' Resulted in #{term.books.count} matches."
+      end
+    end
+  else
+    puts "No searches have been made yet."
   end
+  puts ""
+  puts ""
 end
 
 # TOP 5 POPULAR BOOKS
