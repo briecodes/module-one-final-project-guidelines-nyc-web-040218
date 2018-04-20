@@ -47,6 +47,7 @@ def check_response(word)
     run
   elsif word.downcase == "past searches"
     get_past_searches
+    run
   elsif word.downcase == "most popular"
     most_popular
   elsif word.downcase == "most reviews"
@@ -66,8 +67,9 @@ end
 
 # GET PAST SEARCH WORDS AND BOOK ASSSOCIATIONS
 def get_past_searches
+  puts "'#{term.search_term}' Resulted in #{term.books.count} matche(s):"
   SearchTerm.all.each do |term|
-    puts "'#{term.search_term}' Resulted in #{search_term} matche(s):"
+    puts term.books.map{|b| b.title }.join(", ")
   end
 end
 
@@ -90,7 +92,7 @@ def popular_words
   words = []
   pop = Book.all.each{|b| words << b.description}
   words = words.join(" ")
-  binding.pry
+  # binding.pry
   puts_results_special(pop)
 end
 
@@ -192,7 +194,7 @@ def order?(results_array)
 end
 
 def run
-  binding.pry
+  # binding.pry
   instruction
   word = get_response
   MY_WORDS << word
