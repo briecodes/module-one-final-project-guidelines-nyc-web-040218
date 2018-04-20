@@ -99,7 +99,11 @@ def superseed(seed_arr)
     # BOOK CREATION
       new_book = Book.new()
       new_book.title = volume["volumeInfo"]["title"]
-      new_book.pub_date = volume["volumeInfo"]["publishedDate"]
+      if volume["volumeInfo"]["publishedDate"]
+        new_book.pub_date = volume["volumeInfo"]["publishedDate"]
+      else
+        new_book.pub_date = 0000
+      end
       volume["volumeInfo"]["description"] ? new_book.description = volume["volumeInfo"]["description"] : new_book.description = "No description available."
       new_book.page_count = volume["volumeInfo"]["pageCount"]
       new_book.url = volume["volumeInfo"]["infoLink"]
