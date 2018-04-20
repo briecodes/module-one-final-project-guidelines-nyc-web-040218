@@ -192,7 +192,7 @@ def order?(results_array)
 end
 
 def run
-  # binding.pry
+  binding.pry
   instruction
   word = get_response
   MY_WORDS << word
