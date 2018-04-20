@@ -34,9 +34,9 @@ def check_response(word)
   if word.downcase == "exit"
     puts "Goodbye!"
     exit
-  elsif word.downcase == "rating"
+  elsif word.downcase == "rating" || word.downcase == "order by rating"
     "avg_rating"
-  elsif word.downcase == "publish date"
+  elsif word.downcase == "publish date" || word.downcase == "order by publish date"
     "pub_date"
   elsif word.downcase == "author"
     "authors[0].full_name"
