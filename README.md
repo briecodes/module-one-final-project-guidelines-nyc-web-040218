@@ -49,5 +49,10 @@ Projects need to be approved prior to launching into them, so take some time to 
 7. *OPTIONAL, BUT RECOMMENDED*: Write a blog post about the project and process.
 
 
-# NOTE
+# NOTE: INSTALLATION NEEDED:
+1. bundle install
+2. brew unlink imagemagick
+3. brew install imagemagick@6 && brew link imagemagick@6 --force
+4. gem install asciiart
+
 https://medium.com/@RyanDavidson/transform-images-to-ascii-art-with-asciiart-gem-5e877016eeab
