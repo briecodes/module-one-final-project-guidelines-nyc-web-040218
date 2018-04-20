@@ -106,7 +106,7 @@ end
 
 def search_term_instance(term_inst)
   Book.all.select do |book|
-    book.title ? book.title.downcase.include?(term_inst.term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.term.downcase) : nil
+    book.title ? book.title.downcase.include?(term_inst.search_term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.search_term.downcase) : nil
   end
 end
 
