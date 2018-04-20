@@ -99,7 +99,7 @@ def create_term_instance(word)
 end
 
 def create_query_from_term_instance(term_inst)
-  q = Query.new({term_id: term_inst.id})
+  q = Query.new({search_term_id: term_inst.id})
   q.save
   q
 end
