@@ -41,6 +41,9 @@ def check_response(word)
   elsif word.downcase == "author"
     "authors[0].full_name"
   elsif word.downcase == "restart"
+    # NEED: CLEAR MY_WORDS CONST
+    # My_WORDS.clear
+    welcome
     run
   elsif word.downcase == "past searches"
     get_past_searches
@@ -98,7 +101,7 @@ end
 def create_query_from_term_instance(term_inst)
   q = Query.new({term_id: term_inst.id})
   q.save
-  # q
+  q
 end
 
 def search_term_instance(term_inst)
