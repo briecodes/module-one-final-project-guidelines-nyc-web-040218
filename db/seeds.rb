@@ -13,16 +13,11 @@
 # acc.save
 
 
-<<<<<<< HEAD
 # SEED SINGLE SHOT OF POETRY BOOKS
-=======
-# SEED POETRY BOOKS
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
 # uri = URI("https://www.googleapis.com/books/v1/volumes?")
 # http = Net::HTTP.new(uri.host, uri.port)
 # http.use_ssl = true
 # uri.query = URI.encode_www_form({
-<<<<<<< HEAD
 #  "api-key" => "AIzaSyCZGgx4VzR81LmIxbFTN4c5APMTJfQf",
 #  "q" => "poetry",
 #  "maxResults" => 15
@@ -84,19 +79,6 @@
 seed_arr_words = ["poetry", "philosophy", "fantasy", "sci-fi", "mystery"]
 
 def superseed(seed_arr)
-=======
-#  "api-key" => "",
-#  "q" => "hate",
-#  "maxResults" => 40
-# })
-# request = Net::HTTP::Get.new(uri.request_uri)
-# @result = JSON.parse(http.request(request).body)
-
-seed_arr_words = ["poetry", "philosophy", "fantasy", "sci-fi", "mystery"]
-
-def superseed(seed_arr)
-
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
   seed_arr.map do |word|
 
     # API QUERY
@@ -113,7 +95,6 @@ def superseed(seed_arr)
 
     # PARSING RESULTS
     @result["items"].each do |volume|
-<<<<<<< HEAD
 
     # BOOK CREATION
       new_book = Book.new()
@@ -136,36 +117,17 @@ def superseed(seed_arr)
       else
         new_book.ratings_count = 0
       end
-=======
-    # BOOK CREATION
-      new_book = Book.new()
-      new_book.title = volume["volumeInfo"]["title"]
-      new_book.pub_date = volume["volumeInfo"]["publishedDate"]
-      volume["volumeInfo"]["description"] ? new_book.description = volume["volumeInfo"]["description"] : new_book.description = "No description available."
-      new_book.page_count = volume["volumeInfo"]["pageCount"]
-      new_book.url = volume["volumeInfo"]["infoLink"]
-      new_book.avg_rating = volume["volumeInfo"]["averageRating"]
-      new_book.ratings_count = volume["volumeInfo"]["ratingsCount"]
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
       new_book.save
 
     # AUTHOR CREATION
       if volume["volumeInfo"]["authors"]
         volume["volumeInfo"]["authors"].each do |name|
-<<<<<<< HEAD
           new_author = Author.find_or_create_by({:full_name => name})
-=======
-          new_author = Author.find_or_create_by({:author => name})
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
           new_ba = BookAuthor.new({book_id: new_book.id, author_id: new_author.id})
           new_ba.save
         end
       else
-<<<<<<< HEAD
         new_author = Author.find_or_create_by({:full_name => "Unknown"})
-=======
-        new_author = Author.find_or_create_by({:author => "Unknown"})
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
         new_ba = BookAuthor.new({book_id: new_book.id, author_id: new_author.id})
         new_ba.save
       end
@@ -173,28 +135,17 @@ def superseed(seed_arr)
     # CATEGORY CREATION
       if volume["volumeInfo"]["categories"]
         volume["volumeInfo"]["categories"].each do |cat|
-<<<<<<< HEAD
           new_cat = Category.find_or_create_by({:cat_word => cat})
-=======
-          new_cat = Category.find_or_create_by({:category => cat})
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
           new_bc = BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
           new_bc.save
         end
       else
-<<<<<<< HEAD
         new_cat = Category.find_or_create_by({:cat_word => "Unknown"})
-=======
-        new_cat = Category.find_or_create_by({:category => "Unknown"})
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
         new_bc = BookCategory.new({book_id: new_book.id, category_id: new_cat.id})
         new_bc.save
       end
     end
-<<<<<<< HEAD
-=======
 
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
     # OUTCOME CONFIRMATION
     puts "You have #{Book.all.count} books in your DB."
 

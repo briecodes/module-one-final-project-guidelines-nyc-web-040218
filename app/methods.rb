@@ -74,11 +74,14 @@ def get_past_searches
       if term.books.count == 1
         puts "'#{term.search_term}' Resulted in #{term.books.count} match:"
         puts term.books.map{|b| b.title }.join(", ")
+        puts ""
       elsif term.books.count > 1
         puts "'#{term.search_term}' Resulted in #{term.books.count} matches:"
         puts term.books.map{|b| b.title }.join(", ")
+        puts ""
       else
         puts "'#{term.search_term}' Resulted in #{term.books.count} matches."
+        puts ""
       end
     end
   else
@@ -200,6 +203,10 @@ def order?(results_array)
   response = check_response(up_word)
   order_results(response, results_array)
   puts_results(results_array)
+  puts ""
+  puts ""
+  puts ""
+  puts ""
   puts ""
   puts "YOUR BREADCRUMBS… #{MY_WORDS.join(" > ")}"
   puts "Filtered by #{up_word.upcase}"

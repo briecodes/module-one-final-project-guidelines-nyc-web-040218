@@ -13,11 +13,7 @@
 ActiveRecord::Schema.define(version: 8) do
 
   create_table "authors", force: :cascade do |t|
-<<<<<<< HEAD
     t.string "full_name"
-=======
-    t.string "author"
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
   end
 
   create_table "book_authors", force: :cascade do |t|
@@ -33,25 +29,15 @@ ActiveRecord::Schema.define(version: 8) do
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "pub_date"
-<<<<<<< HEAD
     t.string "description"
     t.integer "page_count"
     t.integer "avg_rating"
-=======
-    t.integer "page_count"
-    t.string "description"
-    t.float "avg_rating"
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
     t.integer "ratings_count"
     t.text "url"
   end
 
   create_table "categories", force: :cascade do |t|
-<<<<<<< HEAD
     t.string "cat_word"
-=======
-    t.string "category"
->>>>>>> 24e68917f48bebe63571771ca8b9c85be2bf3845
   end
 
   create_table "queries", force: :cascade do |t|
