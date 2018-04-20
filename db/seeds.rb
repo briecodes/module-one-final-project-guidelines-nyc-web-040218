@@ -13,7 +13,7 @@
 # acc.save
 
 
-# SEED POETRY BOOKS
+# SEED SINGLE SHOT OF POETRY BOOKS
 # uri = URI("https://www.googleapis.com/books/v1/volumes?")
 # http = Net::HTTP.new(uri.host, uri.port)
 # http.use_ssl = true
@@ -75,10 +75,10 @@
 # puts "You have #{Book.all.count} books in your DB."
 
 
+# SEED MULTIPLE SHOTS OF BOOKS THROUGH AN ARRAY
 seed_arr_words = ["poetry", "philosophy", "fantasy", "sci-fi", "mystery"]
 
 def superseed(seed_arr)
-
   seed_arr.map do |word|
 
     # API QUERY
