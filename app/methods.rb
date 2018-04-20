@@ -67,7 +67,7 @@ end
 # GET PAST SEARCH WORDS AND BOOK ASSSOCIATIONS
 def get_past_searches
   SearchTerm.all.each do |term|
-    puts "'#{term.term}' Resulted in #{term} matche(s):"
+    puts "'#{term.search_term}' Resulted in #{search_term} matche(s):"
   end
 end
 
@@ -95,7 +95,7 @@ def popular_words
 end
 
 def create_term_instance(word)
-  SearchTerm.find_or_create_by({:term => word})
+  SearchTerm.find_or_create_by({:search_term => word})
 end
 
 def create_query_from_term_instance(term_inst)
