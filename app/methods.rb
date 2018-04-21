@@ -53,7 +53,6 @@ def check_response(word)
     Book.most_popular
     run
   elsif word.downcase == "most reviews"
-    # most_reviews
     Book.most_reviews
     run
   elsif word.downcase == "binding.pry"
@@ -105,15 +104,11 @@ def popular_words
   puts_results_special(pop)
 end
 
-# def create_term_instance(word)
-#   SearchTerm.find_or_create_by({:search_term => word})
+# def create_query_from_term_instance(term_inst)
+#   q = Query.new({search_term_id: term_inst.id})
+#   q.save
+#   q
 # end
-
-def create_query_from_term_instance(term_inst)
-  q = Query.new({search_term_id: term_inst.id})
-  q.save
-  q
-end
 
 def search_term_instance(term_inst)
   Book.all.select do |book|
@@ -230,7 +225,7 @@ def run
   # new_term = create_term_instance(word)
   new_term = SearchTerm.create_term_instance(word)
   # CREATE QUERY INSTANCE & SAVE TO DATABASE
-  new_query = create_query_from_term_instance(new_term)
+  new_query = Query.create_query_from_term_instance(new_term)
   # PLACE SEARCH RESULTS INSIDE AN ARRAY
   results_array = search_term_instance(new_term)
   # SAVE RESULTS & QUERY RELATIONSHIP TO DATABASE
