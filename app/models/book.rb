@@ -19,4 +19,10 @@ class Book < ActiveRecord::Base
     puts_results_special(pop.take(5))
   end
 
+  def self.search_term_instance(term_inst)
+    self.all.select do |book|
+      book.title ? book.title.downcase.include?(term_inst.search_term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.search_term.downcase) : nil
+    end
+  end
+
 end

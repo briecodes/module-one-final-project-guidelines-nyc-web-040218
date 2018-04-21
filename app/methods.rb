@@ -104,18 +104,6 @@ def popular_words
   puts_results_special(pop)
 end
 
-# def create_query_from_term_instance(term_inst)
-#   q = Query.new({search_term_id: term_inst.id})
-#   q.save
-#   q
-# end
-
-def search_term_instance(term_inst)
-  Book.all.select do |book|
-    book.title ? book.title.downcase.include?(term_inst.search_term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.search_term.downcase) : nil
-  end
-end
-
 def save_query_results(results_array, query_inst)
   results_array.each do |book|
     q = QueryResult.new({query_id: query_inst.id, book_id: book.id})
@@ -227,7 +215,7 @@ def run
   # CREATE QUERY INSTANCE & SAVE TO DATABASE
   new_query = Query.create_query_from_term_instance(new_term)
   # PLACE SEARCH RESULTS INSIDE AN ARRAY
-  results_array = search_term_instance(new_term)
+  results_array = Book.search_term_instance(new_term)
   # SAVE RESULTS & QUERY RELATIONSHIP TO DATABASE
   save_query_results(results_array, new_query)
   # CHECK IF ANY RESULTS
