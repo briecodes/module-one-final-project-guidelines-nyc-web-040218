@@ -47,7 +47,8 @@ def check_response(word)
     welcome
     run
   elsif word.downcase == "past searches" || word.downcase == "previous searches"
-    get_past_searches
+    # get_past_searches
+    SearchTerm.get_past_searches
     run
   elsif word.downcase == "most popular"
     # most_popular
@@ -88,30 +89,30 @@ def order_results(order_method, results_array)
 end
 
 # GET PAST SEARCH WORDS AND BOOK ASSSOCIATIONS **belongs inside the SearchTerm class**
-def get_past_searches
-  puts ""
-  puts ""
-  if SearchTerm.all.count > 0
-    SearchTerm.all.each do |term|
-      if term.books.count == 1
-        puts "'#{term.search_term}' Resulted in #{term.books.count} match:"
-        puts term.books.map{|b| b.title }.join(", ")
-        puts ""
-      elsif term.books.count > 1
-        puts "'#{term.search_term}' Resulted in #{term.books.count} matches:"
-        puts term.books.map{|b| b.title }.join(", ")
-        puts ""
-      else
-        puts "'#{term.search_term}' Resulted in #{term.books.count} matches."
-        puts ""
-      end
-    end
-  else
-    puts "No searches have been made yet."
-  end
-  puts ""
-  puts ""
-end
+# def get_past_searches
+#   puts ""
+#   puts ""
+#   if SearchTerm.all.count > 0
+#     SearchTerm.all.each do |term|
+#       if term.books.count == 1
+#         puts "'#{term.search_term}' Resulted in #{term.books.count} match:"
+#         puts term.books.map{|b| b.title }.join(", ")
+#         puts ""
+#       elsif term.books.count > 1
+#         puts "'#{term.search_term}' Resulted in #{term.books.count} matches:"
+#         puts term.books.map{|b| b.title }.join(", ")
+#         puts ""
+#       else
+#         puts "'#{term.search_term}' Resulted in #{term.books.count} matches."
+#         puts ""
+#       end
+#     end
+#   else
+#     puts "No searches have been made yet."
+#   end
+#   puts ""
+#   puts ""
+# end
 
 # TOP 5 POPULAR BOOKS
 # def most_popular
