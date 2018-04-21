@@ -19,6 +19,16 @@ class Book < ActiveRecord::Base
     puts_results_special(pop.take(5))
   end
 
+  # MOST POPULAR WORDS FROM BOOK DESCRIPTIONS, NOT YET FUNCTIONAL.
+  def self.popular_words
+    words = []
+    pop = self.all.each{|b| words << b.description}
+    words = words.join(" ")
+    # binding.pry
+    puts_results_special(pop)
+  end
+
+  # SEARCH FOR SUBMITTED WORD
   def self.search_term_instance(term_inst)
     self.all.select do |book|
       book.title ? book.title.downcase.include?(term_inst.search_term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.search_term.downcase) : nil

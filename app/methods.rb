@@ -95,22 +95,6 @@ def order_results(order_method, results_array)
   end
 end
 
-# MOST POPULAR WORDS FROM BOOK DESCRIPTIONS
-def popular_words
-  words = []
-  pop = Book.all.each{|b| words << b.description}
-  words = words.join(" ")
-  # binding.pry
-  puts_results_special(pop)
-end
-
-# def save_query_results(results_array, query_inst)
-#   results_array.each do |book|
-#     q = QueryResult.new({query_id: query_inst.id, book_id: book.id})
-#     q.save
-#   end
-# end
-
 def secret_sauce_opening
   puts ""
   puts ""
