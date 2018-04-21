@@ -104,12 +104,12 @@ def popular_words
   puts_results_special(pop)
 end
 
-def save_query_results(results_array, query_inst)
-  results_array.each do |book|
-    q = QueryResult.new({query_id: query_inst.id, book_id: book.id})
-    q.save
-  end
-end
+# def save_query_results(results_array, query_inst)
+#   results_array.each do |book|
+#     q = QueryResult.new({query_id: query_inst.id, book_id: book.id})
+#     q.save
+#   end
+# end
 
 def secret_sauce_opening
   puts ""
@@ -217,7 +217,7 @@ def run
   # PLACE SEARCH RESULTS INSIDE AN ARRAY
   results_array = Book.search_term_instance(new_term)
   # SAVE RESULTS & QUERY RELATIONSHIP TO DATABASE
-  save_query_results(results_array, new_query)
+  QueryResult.save_query_results(results_array, new_query)
   # CHECK IF ANY RESULTS
   if any_search_results?(results_array)
     # FORMATS & PUTS RESULTS TO THE SCREEN
