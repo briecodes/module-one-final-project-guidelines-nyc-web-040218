@@ -5,6 +5,10 @@ class SearchTerm < ActiveRecord::Base
 	has_many :authors, through: :books
   has_many :categories, through: :books
 
+	def self.create_term_instance(word)
+	  self.find_or_create_by({:search_term => word})
+	end
+
 	# GET PAST SEARCH WORDS AND BOOK ASSSOCIATIONS
 	def self.get_past_searches
 	  puts ""

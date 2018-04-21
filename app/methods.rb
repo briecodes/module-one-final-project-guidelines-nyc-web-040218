@@ -56,12 +56,15 @@ def check_response(word)
     # most_reviews
     Book.most_reviews
     run
+  elsif word.downcase == "binding.pry"
+    binding.pry
+    run
   # elsif word.downcase == "popular words"
   #   popular_words
   end
 end
 
-def check_response_order(word)
+def check_response_order(word, results_array)
   if word.downcase == "exit"
     puts "Goodbye!"
     exit
@@ -76,8 +79,12 @@ def check_response_order(word)
     welcome
     run
   else
+    puts ""
+    puts ""
     puts "Sorry, I don’t understand that command. Try again."
-    
+    puts ""
+    puts ""
+    order?(results_array)
   end
 end
 
@@ -98,9 +105,9 @@ def popular_words
   puts_results_special(pop)
 end
 
-def create_term_instance(word)
-  SearchTerm.find_or_create_by({:search_term => word})
-end
+# def create_term_instance(word)
+#   SearchTerm.find_or_create_by({:search_term => word})
+# end
 
 def create_query_from_term_instance(term_inst)
   q = Query.new({search_term_id: term_inst.id})
@@ -194,7 +201,7 @@ end
 def order?(results_array)
   order_question
   up_word = get_response
-  response = check_response_order(up_word)
+  response = check_response_order(up_word, results_array)
   order_results(response, results_array)
   puts ""
   puts ""
@@ -220,7 +227,8 @@ def run
   puts "Searching for #{word}…"
 
   # CREATE SEARCH TERM INSTANCE & SAVE TO DATABASE
-  new_term = create_term_instance(word)
+  # new_term = create_term_instance(word)
+  new_term = SearchTerm.create_term_instance(word)
   # CREATE QUERY INSTANCE & SAVE TO DATABASE
   new_query = create_query_from_term_instance(new_term)
   # PLACE SEARCH RESULTS INSIDE AN ARRAY
