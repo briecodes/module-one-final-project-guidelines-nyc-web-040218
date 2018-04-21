@@ -66,7 +66,7 @@ def order_results(order_method, results_array)
   end
 end
 
-# GET PAST SEARCH WORDS AND BOOK ASSSOCIATIONS
+# GET PAST SEARCH WORDS AND BOOK ASSSOCIATIONS **belongs inside the SearchTerm class**
 def get_past_searches
   puts ""
   puts ""
@@ -171,11 +171,13 @@ def no_matches
   puts ""
 end
 
-# METHOD TO PUT RESULTS OF SEARCHES
-def puts_results(results_array)
+def we_found
   puts "We found the following #{results_array.count} results:"
   puts ""
+end
 
+# METHOD TO PUT RESULTS OF SEARCHES
+def puts_results(results_array)
   results_array.each do |book|
     puts "Title: #{book.title}"
     puts "Publish Date: #{book.pub_date}"
@@ -232,12 +234,13 @@ def run
   save_query_results(results_array, new_query)
   # CHECK IF ANY RESULTS
   if any_search_results?(results_array)
+    # FORMATS & PUTS RESULTS TO THE SCREEN
+    we_found
     puts_results(results_array)
   else
     no_matches
     run
   end
-  # FORMATS & PUTS RESULTS TO THE SCREEN
 
   puts "YOUR BREADCRUMBS… #{MY_WORDS.join(" > ")}"
   puts ""
