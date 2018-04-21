@@ -53,7 +53,8 @@ def check_response(word)
     # most_popular
     Book.most_popular
   elsif word.downcase == "most reviews"
-    most_reviews
+    # most_reviews
+    Book.most_reviews
   # elsif word.downcase == "popular words"
   #   popular_words
   end
@@ -113,18 +114,18 @@ def get_past_searches
 end
 
 # TOP 5 POPULAR BOOKS
-def most_popular
-  pop = Book.all.map{|b|b}
-  pop.sort!{|a,b| b.avg_rating <=> a.avg_rating}
-  puts_results_special(pop.take(5))
-end
+# def most_popular
+#   pop = Book.all.map{|b|b}
+#   pop.sort!{|a,b| b.avg_rating <=> a.avg_rating}
+#   puts_results_special(pop.take(5))
+# end
 
 # TOP 5 MOST REVIEWED BOOKS
-def most_reviews
-  pop = Book.all.map{|b|b}
-  pop.sort!{|a,b| b.ratings_count <=> a.ratings_count}
-  puts_results_special(pop.take(5))
-end
+# def most_reviews
+#   pop = Book.all.map{|b|b}
+#   pop.sort!{|a,b| b.ratings_count <=> a.ratings_count}
+#   puts_results_special(pop.take(5))
+# end
 
 # MOST POPULAR WORDS FROM BOOK DESCRIPTIONS
 def popular_words
