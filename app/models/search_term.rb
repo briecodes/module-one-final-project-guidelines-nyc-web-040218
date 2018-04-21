@@ -10,20 +10,29 @@ class SearchTerm < ActiveRecord::Base
 	  puts ""
 	  puts ""
 	  if self.all.count > 0
+			puts ""
+	    puts ""
+	    puts ""
+	    puts "(✿ ◡ ‿ ◡)  *  S E C R E T   S A U C E  *  ლ(ಠ益ಠლ)"
+	    puts ""
+	    puts ""
 	    self.all.each do |term|
-	      if term.books.count == 1
-	        puts "'#{term.search_term}' Resulted in #{term.books.count} match:"
-	        puts term.books.map{|b| b.title }.join(", ")
+	      if term.books.uniq.count == 1
+	        puts "'#{term.search_term}' Resulted in #{term.books.uniq.count} match:"
+	        term.books.uniq.map{|b| puts "  • #{b.title}" }
 	        puts ""
-	      elsif term.books.count > 1
-	        puts "'#{term.search_term}' Resulted in #{term.books.count} matches:"
-	        puts term.books.map{|b| b.title }.join(", ")
+	      elsif term.books.uniq.count > 1
+	        puts "'#{term.search_term}' Resulted in #{term.books.uniq.count} matches:"
+					term.books.uniq.map{|b| puts "  • #{b.title}" }
 	        puts ""
 	      else
-	        puts "'#{term.search_term}' Resulted in #{term.books.count} matches."
+	        puts "'#{term.search_term}' Resulted in #{term.books.uniq.count} matches."
 	        puts ""
 	      end
 	    end
+			puts ""
+	    puts "* * * * * *  (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯) * * * * * * * * * *"
+	    puts ""
 	  else
 	    puts "No searches have been made yet."
 	  end
