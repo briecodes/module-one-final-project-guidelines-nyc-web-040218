@@ -14,6 +14,8 @@ def welcome
   puts "Your Personal Keyword Search Assistant"
   puts ""
   puts "(and if you forget your search path... follow the breadcrumbs...)"
+  puts ""
+  puts ""
 end
 
 def instruction
@@ -38,11 +40,10 @@ def check_response(word)
     "avg_rating"
   elsif word.downcase == "publish date" || word.downcase == "order by publish date"
     "pub_date"
-  elsif word.downcase == "author"
+  elsif word.downcase == "author" || word.downcase == "order by author"
     "authors[0].full_name"
   elsif word.downcase == "restart"
-    # NEED: CLEAR MY_WORDS CONST
-    # My_WORDS.clear
+    # NEED TO CLEAR MY_WORDS CONST: My_WORDS.clear
     welcome
     run
   elsif word.downcase == "past searches" || word.downcase == "previous searches"
@@ -153,9 +154,10 @@ def puts_results_special(results_array)
         puts "Average Rating: #{book.avg_rating}, from #{book.ratings_count} responses."
       end
       puts ""
-      puts "* * * * * *  (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯) * * * * * * * * * *"
-      puts ""
     end
+    puts ""
+    puts "* * * * * *  (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯) * * * * * * * * * *"
+    puts ""
   end
 end
 
@@ -164,16 +166,13 @@ def any_search_results?(results_array)
 end
 
 def no_matches
-  puts ""
-  puts ""
   puts "Sorry, no matches for your search. Try again!"
+  puts ""
   puts ""
 end
 
 # METHOD TO PUT RESULTS OF SEARCHES
 def puts_results(results_array)
-  puts ""
-  puts ""
   puts "We found the following #{results_array.count} results:"
   puts ""
 
