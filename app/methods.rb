@@ -47,15 +47,15 @@ def check_response(word)
     welcome
     run
   elsif word.downcase == "past searches" || word.downcase == "previous searches"
-    # get_past_searches
     SearchTerm.get_past_searches
     run
   elsif word.downcase == "most popular"
-    # most_popular
     Book.most_popular
+    run
   elsif word.downcase == "most reviews"
     # most_reviews
     Book.most_reviews
+    run
   # elsif word.downcase == "popular words"
   #   popular_words
   end
@@ -77,6 +77,7 @@ def check_response_order(word)
     run
   else
     puts "Sorry, I don’t understand that command. Try again."
+    
   end
 end
 
@@ -87,46 +88,6 @@ def order_results(order_method, results_array)
     results_array.sort!{|a, b| b.send(order_method) <=> a.send(order_method)}
   end
 end
-
-# GET PAST SEARCH WORDS AND BOOK ASSSOCIATIONS **belongs inside the SearchTerm class**
-# def get_past_searches
-#   puts ""
-#   puts ""
-#   if SearchTerm.all.count > 0
-#     SearchTerm.all.each do |term|
-#       if term.books.count == 1
-#         puts "'#{term.search_term}' Resulted in #{term.books.count} match:"
-#         puts term.books.map{|b| b.title }.join(", ")
-#         puts ""
-#       elsif term.books.count > 1
-#         puts "'#{term.search_term}' Resulted in #{term.books.count} matches:"
-#         puts term.books.map{|b| b.title }.join(", ")
-#         puts ""
-#       else
-#         puts "'#{term.search_term}' Resulted in #{term.books.count} matches."
-#         puts ""
-#       end
-#     end
-#   else
-#     puts "No searches have been made yet."
-#   end
-#   puts ""
-#   puts ""
-# end
-
-# TOP 5 POPULAR BOOKS
-# def most_popular
-#   pop = Book.all.map{|b|b}
-#   pop.sort!{|a,b| b.avg_rating <=> a.avg_rating}
-#   puts_results_special(pop.take(5))
-# end
-
-# TOP 5 MOST REVIEWED BOOKS
-# def most_reviews
-#   pop = Book.all.map{|b|b}
-#   pop.sort!{|a,b| b.ratings_count <=> a.ratings_count}
-#   puts_results_special(pop.take(5))
-# end
 
 # MOST POPULAR WORDS FROM BOOK DESCRIPTIONS
 def popular_words
@@ -181,6 +142,7 @@ def puts_results_special(results_array)
     secret_sauce_opening
     results_array.each do |book|
       puts "Title: #{book.title}"
+      puts "Author(s): #{book.authors.map{|a| a.full_name}.join(', ')}"
       puts "#{book.page_count} pages."
       if book.avg_rating
         puts "Average Rating: #{book.avg_rating}, from #{book.ratings_count} responses."
@@ -232,7 +194,7 @@ end
 def order?(results_array)
   order_question
   up_word = get_response
-  response = check_response(up_word)
+  response = check_response_order(up_word)
   order_results(response, results_array)
   puts ""
   puts ""
