@@ -50,11 +50,31 @@ def check_response(word)
     get_past_searches
     run
   elsif word.downcase == "most popular"
-    most_popular
+    # most_popular
+    Book.most_popular
   elsif word.downcase == "most reviews"
     most_reviews
   # elsif word.downcase == "popular words"
   #   popular_words
+  end
+end
+
+def check_response_order(word)
+  if word.downcase == "exit"
+    puts "Goodbye!"
+    exit
+  elsif word.downcase == "rating" || word.downcase == "order by rating"
+    "avg_rating"
+  elsif word.downcase == "publish date" || word.downcase == "order by publish date"
+    "pub_date"
+  elsif word.downcase == "author" || word.downcase == "order by author"
+    "authors[0].full_name"
+  elsif word.downcase == "restart"
+    # NEED TO CLEAR MY_WORDS CONST: My_WORDS.clear
+    welcome
+    run
+  else
+    puts "Sorry, I don’t understand that command. Try again."
   end
 end
 
