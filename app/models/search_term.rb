@@ -10,12 +10,7 @@ class SearchTerm < ActiveRecord::Base
 	  puts ""
 	  puts ""
 	  if self.all.count > 0
-			puts ""
-	    puts ""
-	    puts ""
-	    puts "(✿ ◡ ‿ ◡)  *  S E C R E T   S A U C E  *  ლ(ಠ益ಠლ)"
-	    puts ""
-	    puts ""
+			secret_sauce_opening
 	    self.all.each do |term|
 	      if term.books.uniq.count == 1
 	        puts "'#{term.search_term}' Resulted in #{term.books.uniq.count} match:"
@@ -30,9 +25,7 @@ class SearchTerm < ActiveRecord::Base
 	        puts ""
 	      end
 	    end
-			puts ""
-	    puts "* * * * * *  (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯) * * * * * * * * * *"
-	    puts ""
+			secret_sauce_closing
 	  else
 	    puts "No searches have been made yet."
 	  end

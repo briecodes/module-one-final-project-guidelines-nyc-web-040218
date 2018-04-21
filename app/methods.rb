@@ -160,15 +160,25 @@ def save_query_results(results_array, query_inst)
   end
 end
 
+def secret_sauce_opening
+  puts ""
+  puts ""
+  puts ""
+  puts "(✿ ◡ ‿ ◡)  *  S E C R E T   S A U C E  *  ლ(ಠ益ಠლ)"
+  puts ""
+  puts ""
+end
+
+def secret_sauce_closing
+  puts ""
+  puts "* * * * * *  (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯) * * * * * * * * * *"
+  puts ""
+end
+
 # SECRET SAUCE METHOD FOR SPECIAL SEARCHES, PROVIDING LIMITED INFORMATION
 def puts_results_special(results_array)
   if results_array.count > 0
-    puts ""
-    puts ""
-    puts ""
-    puts "(✿ ◡ ‿ ◡)  *  S E C R E T   S A U C E  *  ლ(ಠ益ಠლ)"
-    puts ""
-    puts ""
+    secret_sauce_opening
     results_array.each do |book|
       puts "Title: #{book.title}"
       puts "#{book.page_count} pages."
@@ -177,9 +187,7 @@ def puts_results_special(results_array)
       end
       puts ""
     end
-    puts ""
-    puts "* * * * * *  (╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯) * * * * * * * * * *"
-    puts ""
+    secret_sauce_closing
   end
 end
 
