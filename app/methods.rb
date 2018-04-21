@@ -171,7 +171,7 @@ def no_matches
   puts ""
 end
 
-def we_found
+def we_found(results_array)
   puts "We found the following #{results_array.count} results:"
   puts ""
 end
@@ -179,6 +179,9 @@ end
 # METHOD TO PUT RESULTS OF SEARCHES
 def puts_results(results_array)
   results_array.each do |book|
+    puts ""
+    puts "* * * * * * * * * * * * * * * *"
+    puts ""
     puts "Title: #{book.title}"
     puts "Publish Date: #{book.pub_date}"
     if book.page_count
@@ -192,8 +195,6 @@ def puts_results(results_array)
     end
     puts "Buy now: #{book.url}"
     puts ""
-    puts "* * * * * * * * * * * * * * * *"
-    puts ""
   end
 end
 
@@ -203,14 +204,16 @@ def order?(results_array)
   up_word = get_response
   response = check_response(up_word)
   order_results(response, results_array)
+  puts ""
+  puts ""
+  puts "Sorting by #{up_word.upcase}…"
+  puts ""
   puts_results(results_array)
-  puts ""
-  puts ""
-  puts ""
+  puts "* * * * * * * * * * * * * * * *"
   puts ""
   puts ""
   puts "YOUR BREADCRUMBS… #{MY_WORDS.join(" > ")}"
-  puts "Filtered by #{up_word.upcase}"
+  puts "Sorted by #{up_word.upcase}"
   puts ""
   puts ""
   order?(results_array)
@@ -235,7 +238,7 @@ def run
   # CHECK IF ANY RESULTS
   if any_search_results?(results_array)
     # FORMATS & PUTS RESULTS TO THE SCREEN
-    we_found
+    we_found(results_array)
     puts_results(results_array)
   else
     no_matches
