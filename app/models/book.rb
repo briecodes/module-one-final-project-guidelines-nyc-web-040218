@@ -24,21 +24,28 @@ class Book < ActiveRecord::Base
     words = []
     pop = self.all.each{|b| words << b.description}
     words = words.join(" ")
-    # binding.pry
     puts_results_special(pop)
   end
 
   # SEARCH FOR SUBMITTED WORD
   def self.search_term_instance(term_inst)
-    # binding.pry
-    self.all.select do |book|
-      # binding.pry
-      book.title ? book.title.downcase.include?(term_inst.search_term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.search_term.downcase) : nil
+    new_arr = []
+    new_arr << self.all.select do |book|
+      # book.title ? book.title.downcase.include?(term_inst.search_term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.search_term.downcase) : nil
+      if book.title
+        book.title.downcase.include?(term_inst.search_term.downcase)
+      end
     end
+    new_arr << self.all.select do |book|
+      book.description.downcase.include?(term_inst.search_term.downcase)
+    end
+    new_arr.flatten!.uniq!
+    new_arr
   end
 
   def self.search_api(term_inst)
     new_book_array = []
+    
     # API QUERY
     uri = URI("https://www.googleapis.com/books/v1/volumes?")
     http = Net::HTTP.new(uri.host, uri.port)
