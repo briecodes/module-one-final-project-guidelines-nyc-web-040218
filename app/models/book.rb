@@ -30,7 +30,9 @@ class Book < ActiveRecord::Base
 
   # SEARCH FOR SUBMITTED WORD
   def self.search_term_instance(term_inst)
+    # binding.pry
     self.all.select do |book|
+      # binding.pry
       book.title ? book.title.downcase.include?(term_inst.search_term.downcase) : nil || book.description ? book.description.downcase.include?(term_inst.search_term.downcase) : nil
     end
   end

@@ -201,11 +201,12 @@ def run
   # PLACE SEARCH RESULTS INSIDE AN ARRAY
   results_array = []
   results_array << Book.search_term_instance(new_term)
+  binding.pry
   # SEARCH THROUGH GOOGLE BOOKS API
   results_array << Book.search_api(new_term)
   # CLEAN UP ARRAY
-  binding.pry
-  results_array.flatten
+  # binding.pry
+  results_array.flatten!
   # SAVE RESULTS & QUERY RELATIONSHIP TO DATABASE
   QueryResult.save_query_results(results_array, new_query)
   # CHECK IF ANY RESULTS
