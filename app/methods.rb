@@ -199,8 +199,13 @@ def run
   # CREATE QUERY INSTANCE & SAVE TO DATABASE
   new_query = Query.create_query_from_term_instance(new_term)
   # PLACE SEARCH RESULTS INSIDE AN ARRAY
-  # results_array = Book.search_term_instance(new_term)
-  results_array = Book.search_api(new_term)
+  results_array = []
+  results_array << Book.search_term_instance(new_term)
+  # SEARCH THROUGH GOOGLE BOOKS API
+  results_array << Book.search_api(new_term)
+  # CLEAN UP ARRAY
+  binding.pry
+  results_array.flatten
   # SAVE RESULTS & QUERY RELATIONSHIP TO DATABASE
   QueryResult.save_query_results(results_array, new_query)
   # CHECK IF ANY RESULTS
